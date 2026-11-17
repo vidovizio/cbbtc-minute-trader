@@ -37,7 +37,7 @@ def on_batch(state, batch):
     if any(fill["side"] == "sell" and fill["status"] == "filled" for fill in batch["fills"]):
         cooldown_until = state.seq + COOLDOWN_BARS
 
-    if state.warming_up or state.seq >= 1_439:
+    if state.warming_up:
         return []
 
     holding = state.positions.get(SYMBOL)
